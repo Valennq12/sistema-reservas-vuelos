@@ -54,6 +54,16 @@ def capturar_datos_pasajero():
             correo = input("Ingrese su correo electrónico: ")
             return Pasajero(nombre, apellido, edad, telefono, correo)
 
+def capturar_datos_reserva():
+    numero_vuelo = input("Ingrese el número de vuelo que desea reservar: ")
+    try:
+        cantidad = int(input("Ingrese la cantidad de asientos que desea reservar (máximo 10): "))
+    except ValueError:
+        print("Debe ingresar un número válido de asientos.")
+        return None, None
+    return numero_vuelo, cantidad
+
+
 
 def main():
     vuelos = [
@@ -70,11 +80,10 @@ def main():
     elif opcion == '2':
         pasajero = capturar_datos_pasajero()
 
-        #extraer método
-        numero = input("Ingrese el número de vuelo que desea reservar: ")
-        cantidad = int(input("Ingrese la cantidad de asientos que desea reservar (máximo 10): "))
+        numero, cantidad = capturar_datos_reserva()
+        if numero is None or cantidad is None:
+            return
 
-        reservar_vuelo(vuelos, numero, pasajero, cantidad)
     else:
         print("Opción no válida.")
 
